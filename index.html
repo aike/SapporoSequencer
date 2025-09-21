@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Tone.js Drum Sequencer</title>
+  <script src="https://cdn.jsdelivr.net/npm/tone@14.8.49/build/Tone.js"></script>
+  <script type="text/javascript" src="three.min.js"></script>
+  <script type="text/javascript" src="ThreePiece.js"></script>
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <h1>Sapporo Sequencer</h1>
+
+  <div class="lbl" id="s_sy">SYNTH</div>
+  <div class="lbl" id="s_bs">BASS</div>
+  <div class="lbl" id="s_hh">HH</div>
+  <div class="lbl" id="s_cl">CLAP</div>
+  <div class="lbl" id="s_sd">SD</div>
+  <div class="lbl" id="s_bd">BD</div>
+
+
+  <div id="bg"></div>
+  <div id="bg2"></div>
+
+
+
+<script>
+  var coltbl = [
+    [0x000022, 0x001122, 0x002222, 0x002200, 0x221100, 0x220000],
+    [0x0000ff, 0x0088ff, 0x00ffff, 0x00ff00, 0xff8800, 0xff0000]
+  ];
+
+
+    var t = new ThreePiece("bg2", 1500/2, 1000/2);
+    var r = -Math.PI / 2;
+    var data = [
+      {obj:"PerspectiveCamera",  x:0, y:1.4, z:1.95, rx:-0.7, rz: 0.04},
+    ];
+
+    var py = 0.87;
+    var px = 0.96;
+
+    // グリッド線
+    for (var i = 0; i <= 30; i++) {
+  		var j = i - 15;
+//		  data.push({obj:'line',x:j*px-px*0.6,y:-0.0,z:-50,tx:j*px-px*0.6,ty:-0.0,tz:50,col:0x006600});
+//		  data.push({obj:'line',x:-50,y:-0.0,z:j*py-py*0.5,tx:50,ty:-0.0,tz:j*py-py*0.5,col:0x006600});
+    }
+
+    for (y = 0; y < 6; y++) {
+      for (x = 0; x < 8; x++) {
+        var nm = "p"+x+"_"+y;
+        console.log(nm);
+        data.push({obj:"Plane", name:nm, x: x*px-3, z:y*py+0.9, w:px*0.85, h:py*0.85, rx: r, col:coltbl[0][y]});
+      }
+    }
+    t.useDirtyFlag();
+    t.eval(data);
+
+    var cursor = 0;
+    var nextStep = function() {
+      for (var y = 0; y < 6; y++) {
+        for (var x = 0; x < 8; x++) {
+          var o = t.obj("p" + x + "_" + y);
+          if (x == cursor) {
+            if (steps[y][x]) {
+              o.material.color.set(coltbl[0][y]);
+            } else {
+              o.material.color.set(coltbl[1][y]);
+            }
+          } else {
+            if (steps[y][x]) {
+              o.material.color.set(coltbl[1][y]);
+            } else {
+              o.material.color.set(coltbl[0][y]);
+            }
+          }
+        }
+      }
+      cursor = (cursor + 1) % 8;
+      t.setDirty();
+    };
+
+</script>
+
+
+
+  <div id="grid"></div>
+  <div id="startBtnDiv">
+  <button id="startBtn">Start</button>
+  </div>
+
+  <script>
+    // === 設定 ===
+    const rows = 6;
+    const cols = 8;
+    const samples = [
+      "synth.wav",
+      "bass.wav", 
+      "hihat.wav", 
+      "clap.wav", 
+      "snare.wav", 
+      "kick.wav", 
+    ];
+
+    // === プレイヤー ===
+    const players = new Tone.Players(
+      samples.reduce((obj, name) => { obj[name] = name; return obj; }, {}),
+      () => console.log("samples loaded")
+    ).toDestination();
+
+    // === グリッド状態 ===
+    const steps = Array.from({ length: rows }, () => Array(cols).fill(false));
+
+    const gridEl = document.getElementById("grid");
+
+    // パッド生成
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const pad = document.createElement("div");
+        pad.className = "pad";
+        pad.dataset.row = r;
+        pad.dataset.col = c;
+        pad.addEventListener("click", () => {
+          steps[r][c] = !steps[r][c];
+          pad.classList.toggle("on", steps[r][c]);
+        });
+        gridEl.appendChild(pad);
+      }
+    }
+
+    // === シーケンサー ===
+    let currentCol = 0;
+
+    const seq = new Tone.Sequence((time, col) => {
+      // カラムのハイライト
+      nextStep();
+      document.querySelectorAll(".pad").forEach(p => p.classList.remove("active"));
+      for (let r = 0; r < rows; r++) {
+        const pad = document.querySelector(`.pad[data-row="${r}"][data-col="${col}"]`);
+        pad.classList.add("active");
+        if (steps[r][col]) {
+          players.player(samples[r]).start(time);
+        }
+      }
+    }, Array.from({ length: cols }, (_, i) => i), "16n");
+
+    seq.loop = true;
+
+    // === 再生ボタン ===
+    document.getElementById("startBtn").addEventListener("click", async () => {
+      await Tone.start();
+      console.log(Tone.Transport.state);
+      if (Tone.Transport.state !== "started") {
+        Tone.Transport.bpm.value = 70;
+        cursor = 0;
+        seq.start(0);
+        Tone.Transport.start();
+      } else {
+//        seq.stop();
+        Tone.Transport.stop();
+      }
+    });
+  </script>
+</body>
+</html>

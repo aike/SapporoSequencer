@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<script type="text/javascript" src="three.min.js"></script>
+<script type="text/javascript" src="ThreePiece.js"></script>
+
+<title>遠近グリッド（8×16）</title>
+<!--style>
+  body { margin: 0; background:#111; color:#ddd; font-family: system-ui, sans-serif; }
+  header { padding: 12px 16px; }
+  #stage { display:block; width:100%; height: calc(100vh - 56px); }
+  .cell {
+    fill: #2a7; 
+    fill-opacity: 0.75;
+    stroke: #0e4;
+    stroke-opacity: 0.9;
+    stroke-width: 1.5;
+    transition: transform 80ms ease, fill-opacity 80ms ease;
+    cursor: pointer;
+  }
+  .cell:hover { fill-opacity: 1; }
+</style-->
+</head>
+<body>
+<header>遠近グリッド（8×16）— クリックで <code>cellClicked(row, col)</code> を実行</header>
+<!--svg id="stage"></svg-->
+
+<div id="draw"></div>
+
+<script>
+  var t = new ThreePiece("draw", 700, 500);
+
+  var r = -Math.PI / 2;
+
+  var data = [
+    {obj:"grid"}
+  ];
+
+  for (x = -4; x <= 4; x++) {
+    for (y = 0; y < 6; y++) {
+      data.push({obj:"Plane",  x: x, z:y, w:0.9, h:0.9, rx: r, col:0x00FF00});
+    }
+  }
+
+
+
+
+
+  t.eval(data);
+</script>
+</body>
+</html>
