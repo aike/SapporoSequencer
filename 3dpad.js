@@ -22,12 +22,18 @@ for (var i = 0; i <= 30; i++) {
 	// data.push({obj:'line',x:-50,y:-0.0,z:j*py-py*0.5,tx:50,ty:-0.0,tz:j*py-py*0.5,col:0x006600});
 }
 
+// 6x8 のパッド
 for (y = 0; y < 6; y++) {
   for (x = 0; x < 8; x++) {
     var nm = "p"+x+"_"+y;
     data.push({obj:"Plane", name:nm, x: x*px-3, z:y*py+0.9, w:px*0.85, h:py*0.85, rx: r, col:coltbl[0][y]});
   }
 }
+
+// 現在位置
+const cx = 0;
+const cy = 100;
+data.push({obj:"Plane", name:"poscursor", x: cx*px-3, y:-0.01, z:cy*py+0.9, w:px, h:py, rx: r, col:0xFFFFFF});
 
 data.push({obj:"Plane", name:"start", x: -0.5, z:-1.75, w:px*0.85*1.8, h:py*0.7*2, rx: r, col:0xFF0000});
 data.push({obj:"Plane", name:"bpm", x: 2.5, z:0, w:px*0.5, h:py*0.5, rx: r, col:0xFFFF00});
@@ -60,3 +66,17 @@ var nextStep = function() {
   cursor = (cursor + 1) % 8;
   t.setDirty();
 };
+
+function setPadXY(x, y) {
+  var o = t.obj("poscursor");
+  if (o) {
+    if (x < 0) {
+      console.log("hide");
+      o.position.z = 100; // 見えないところに隠す
+    } else {
+      o.position.x = x * px - 3;
+      o.position.z = y * py + 0.9;  
+    }
+    t.setDirty();
+  }
+}

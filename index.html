@@ -24,6 +24,18 @@
   <div id="grid"></div>
   <!-- div id="startBtnDiv"><button id="startBtn">Start</button></div -->
 
+  <div id="debugpanel">
+    <button id="btnGeo">現在地</button>　<span id="geoStatus"></span>
+    <br /><br />
+    <button id="btnManual">指定座標</button>
+    <br /><br />
+    緯度(lat),経度(lon): <br />
+    <input id="latlon" value="43.0585,141.3518">
+    <br /><br />
+    <div id="xy"></div>
+    <div id="southwest"></div>
+  </div>
+
   <div id="startstop"></div>
   <div id="bpm"></div>
 
@@ -33,5 +45,6 @@
 
   <script type="text/javascript" src="3dpad.js"></script>
   <script type="text/javascript" src="sequencer.js"></script>
+  <script type="text/javascript" src="geo.js"></script>
 </body>
 </html>

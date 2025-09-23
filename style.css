@@ -133,3 +133,29 @@ button {
   margin-left: 5px;
 }
 
+button {
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  padding: 0;
+}
+
+#latlon {
+  width: 340px;
+  height: 30px;
+  font-size: 14px;
+}
+
+
+#debugpanel {
+  position: absolute;
+  top: 350px;
+  left: 1000px;
+  width: 350px;
+  height: 250px;
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+  color: #ccc;
+  background-color: #001122;
+}
