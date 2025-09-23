@@ -55,7 +55,7 @@ const seq = new Tone.Sequence((time, col) => {
 seq.loop = true;
 
 // === 再生ボタン ===
-document.getElementById("startBtn").addEventListener("click", async () => {
+document.getElementById("startstop").addEventListener("click", async () => {
   await Tone.start();
   console.log(Tone.Transport.state);
   if (Tone.Transport.state !== "started") {
@@ -66,5 +66,21 @@ document.getElementById("startBtn").addEventListener("click", async () => {
   } else {
 //        seq.stop();
     Tone.Transport.stop();
+  }
+});
+
+document.getElementById("bpm").addEventListener("click", () => {
+  const bpminput = document.getElementById("bpminput");
+  if (bpminput.style.display === "block") {
+    bpminput.style.display = "none";
+  } else {
+    bpminput.style.display = "block";
+  }
+});
+
+document.getElementById("bpmval").addEventListener("change", () => {
+  const bpm = parseInt(document.getElementById("bpmval").value);
+  if (!isNaN(bpm) && bpm >= 60 && bpm <= 180) {
+    Tone.Transport.bpm.value = Math.floor(bpm / 2);
   }
 });

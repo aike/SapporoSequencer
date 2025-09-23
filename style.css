@@ -6,37 +6,38 @@ body {
   text-align: center; 
 }
 
-h1 {
+
+#labels {
   position: absolute;
   top: 0px;
-  left: 110px;
-  font-size: 18px;
-  font-weight: lighter;
-  color: #ddf;
-  transform: scale(1.0, 0.8);
-/*  transform: scale(1.0, 0.9) skew(-45deg); */
-  z-index: 2000;
+  left: 100px;
+  width: 750px;
+  height: 500px;
+  background-image: url(label.png);
+  background-size: 750px 500px;
+  background-repeat: no-repeat;
+  z-index: -1;
 }
 
 #bg {
   position: absolute;
   top: 0px;
   left: 100px;
-  width: 70%;
-  height: 70%;
+  width: 750px;
+  height: 500px;
   background-image: url(bg.png);
   background-size: 750px 500px;
   background-repeat: no-repeat;
-  /*z-index: -1; */
+  z-index: -2;
   opacity: 0.5;
 }
 
-#bg2 {
+
+#pad {
   position: absolute;
   top: 0px;
   left: 100px;
-  z-index: -2;
-/*  opacity: 0.3;*/
+  z-index: -3;
 }
 
 .lbl {
@@ -47,12 +48,12 @@ h1 {
   z-index: 1000;
 }
 
-#s_sy { top: 215px; left: 220px; font-size: 12px; }
-#s_bs { top: 245px; left: 210px; font-size: 15px; }
-#s_hh { top: 280px; left: 205px; font-size: 17px; }
-#s_cl { top: 315px; left: 175px; font-size: 18px; }
-#s_sd { top: 355px; left: 170px; font-size: 22px; }
-#s_bd { top: 405px; left: 140px; font-size: 25px; }
+#s_sy { top: 215px; left: 217px; font-size: 12px; }
+#s_bs { top: 245px; left: 205px; font-size: 15px; }
+#s_hh { top: 280px; left: 200px; font-size: 17px; }
+#s_cl { top: 315px; left: 167px; font-size: 18px; }
+#s_sd { top: 355px; left: 162px; font-size: 22px; }
+#s_bd { top: 405px; left: 135px; font-size: 25px; }
 
 
 
@@ -92,3 +93,43 @@ h1 {
 button { 
   padding: 8px 20px; 
 }
+
+#startstop {
+  position: absolute;
+  top: 138px;
+  left: 385px;
+  width: 85px;
+  height: 40px;
+  background-color: rgba(255,255,255,0.0);
+  z-index: 10000;
+}
+
+#bpm {
+  position: absolute;
+  top: 195px;
+  left: 565px;
+  width: 32px;
+  height: 25px;
+  background-color: rgba(255,255,255,0.0);
+  z-index: 10000;
+}
+
+#bpminput {
+  display: none;
+  position: absolute;
+  top: 530px;
+  left: 100px;
+  background: #224;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #ccf;
+}
+
+#bpmval {
+  width: 45px;
+  font-size: 14px;
+  text-align: right;
+  margin-left: 5px;
+}
+

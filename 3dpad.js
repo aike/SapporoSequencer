@@ -5,10 +5,11 @@ var coltbl = [
 ];
 
 
-var t = new ThreePiece("bg2", 1500/2, 1000/2);
+var t = new ThreePiece("pad", 1500/2, 1000/2);
 var r = -Math.PI / 2;
 var data = [
-  {obj:"PerspectiveCamera",  x:0, y:1.4, z:1.95, rx:-0.7, rz: 0.04},
+  //{obj:"PerspectiveCamera",  x:0, y:1.4, z:1.95, rx:-0.7, rz: 0.04},
+  {obj:"PerspectiveCamera",  x:0.0, y:1.3, z:2, rx:-0.65, ry:-0.01, rz: 0.04},
 ];
 
 var py = 0.87;
@@ -28,8 +29,8 @@ for (y = 0; y < 6; y++) {
   }
 }
 
-data.push({obj:"Plane", name:"start", x: -0.7, z:-1.6, w:px*0.85*2, h:py*0.85*2, rx: r, col:0xFF0000});
-data.push({obj:"Plane", name:"start", x: 2.4, z:0, w:px*0.5, h:py*0.5, rx: r, col:0xFFFF00});
+data.push({obj:"Plane", name:"start", x: -0.5, z:-1.75, w:px*0.85*1.8, h:py*0.7*2, rx: r, col:0xFF0000});
+data.push({obj:"Plane", name:"bpm", x: 2.5, z:0, w:px*0.5, h:py*0.5, rx: r, col:0xFFFF00});
 
 
 
