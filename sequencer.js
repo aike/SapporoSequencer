@@ -54,8 +54,15 @@ const seq = new Tone.Sequence((time, col) => {
 
 seq.loop = true;
 
+var click;
+if (window.ontouchstart === null) {
+	click = "touchstart";
+} else{
+	click = "click";
+}
+
 // === 再生ボタン ===
-document.getElementById("startstop").addEventListener("click", async () => {
+document.getElementById("startstop").addEventListener(click, async () => {
   await Tone.start();
   console.log(Tone.Transport.state);
   if (Tone.Transport.state !== "started") {
@@ -69,7 +76,7 @@ document.getElementById("startstop").addEventListener("click", async () => {
   }
 });
 
-document.getElementById("bpm").addEventListener("click", () => {
+document.getElementById("bpm").addEventListener(click, () => {
   const bpminput = document.getElementById("bpminput");
   if (bpminput.style.display === "block") {
     bpminput.style.display = "none";
