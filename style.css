@@ -94,6 +94,7 @@ button {
   padding: 8px 20px; 
 }
 
+/* transparent button over the START/STOP button */
 #startstop {
   position: absolute;
   top: 138px;
@@ -104,6 +105,7 @@ button {
   z-index: 10000;
 }
 
+/* transparent button over the BPM balloon */
 #bpm {
   position: absolute;
   top: 195px;
@@ -114,21 +116,36 @@ button {
   z-index: 10000;
 }
 
+
+#bpm {
+
+  /*
+  position: absolute;
+  top: 195px;
+  left: 565px;
+  width: 32px;
+  height: 25px;
+  background-color: rgba(255,255,255,0.0);
+  z-index: 10000;
+  */
+}
+
 #bpminput {
   display: none;
   position: absolute;
-  top: 530px;
-  left: 100px;
-  background: #224;
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 14px;
-  color: #ccf;
+  top: 100px;
+  left: 580px;
+  width: 150px;
+  height: 112px;
+  background-image: url(balloon.png);
+  background-size: 150px 112px;
+  background-repeat: no-repeat;
 }
 
 #bpmval {
-  width: 45px;
-  font-size: 14px;
+  margin-top: 18px;
+  width: 55px;
+  font-size: 18px;
   text-align: right;
   margin-left: 5px;
 }
@@ -143,7 +160,7 @@ button {
 #latlon {
   width: 340px;
   height: 30px;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 
