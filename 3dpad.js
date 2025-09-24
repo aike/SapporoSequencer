@@ -1,8 +1,9 @@
 
-var coltbl = [
+const padcolor = [
   [0x000022, 0x001122, 0x002222, 0x002200, 0x221100, 0x220000],
   [0x0000ff, 0x004488, 0x008844, 0x00ff00, 0x884400, 0xff0000]
 ];
+const instruments = ["SYNTH", "BASS", "HH", "CLAP", "SD", "BD"];
 
 
 var t = new ThreePiece("pad", 1500/2, 1000/2);
@@ -26,7 +27,7 @@ for (var i = 0; i <= 30; i++) {
 for (y = 0; y < 6; y++) {
   for (x = 0; x < 8; x++) {
     var nm = "p"+x+"_"+y;
-    data.push({obj:"Plane", name:nm, x: x*px-3, z:y*py+0.9, w:px*0.85, h:py*0.85, rx: r, col:coltbl[0][y]});
+    data.push({obj:"Plane", name:nm, x: x*px-3, z:y*py+0.9, w:px*0.85, h:py*0.85, rx: r, col:padcolor[0][y]});
   }
 }
 
@@ -50,15 +51,15 @@ var nextStep = function() {
       var o = t.obj("p" + x + "_" + y);
       if (x == cursor) {
         if (steps[y][x]) {
-          o.material.color.set(coltbl[0][y]);
+          o.material.color.set(padcolor[0][y]);
         } else {
-          o.material.color.set(coltbl[1][y]);
+          o.material.color.set(padcolor[1][y]);
         }
       } else {
         if (steps[y][x]) {
-          o.material.color.set(coltbl[1][y]);
+          o.material.color.set(padcolor[1][y]);
         } else {
-          o.material.color.set(coltbl[0][y]);
+          o.material.color.set(padcolor[0][y]);
         }
       }
     }
@@ -67,11 +68,10 @@ var nextStep = function() {
   t.setDirty();
 };
 
-function setPadXY(x, y) {
+function setPadCursor(x, y) {
   var o = t.obj("poscursor");
   if (o) {
     if (x < 0) {
-      console.log("hide");
       o.position.z = 100; // 見えないところに隠す
     } else {
       o.position.x = x * px - 3;

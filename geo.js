@@ -150,8 +150,10 @@ function calcColRow(lat, lon) {
 function toLocationString(colrow) {
   const [col, row] = colrow;
   if (col < 0 || col >= geocols || row < 0 || row >= georows) return "";
-  const jo  = ["北1","北1","大通","大通","南1","南1","南1","南2","南2","南2","南3","南3"];
-  const cho = ["西8","西7","西6","西5","西4","西3","西2","西1"];
+  //const jo  = ["北1","北1","大通","大通","南1","南1","南1","南2","南2","南2","南3","南3"];
+  //const cho = ["西8","西7","西6","西5","西4","西3","西2","西1"];
+  const jo  = ["N1","N1","Odori","Odori","S1","S1","S1","S2","S2","S2","S3","S3"];
+  const cho = ["W8","W7","W6","W5","W4","W3","W2","W1"];
   return jo[row] + cho[col];
 }
 
@@ -167,7 +169,8 @@ function getGeoStatus(infoElm, callback) {
     return;
   }
   infoElm.textContent = '現在地を取得中...';
-  navigator.geolocation.getCurrentPosition(
+//  navigator.geolocation.getCurrentPosition(
+  navigator.geolocation.watchPosition(
     (pos) => {
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;
@@ -176,10 +179,11 @@ function getGeoStatus(infoElm, callback) {
     },
     (err) => {
       infoElm.textContent = `取得失敗: ${err.message}`;
+      clearGeoStatus();
     },
     {
       enableHighAccuracy: true,
-      timeout: 10000,
+      timeout: 3000,
       maximumAge: 0,
     }
   );
@@ -187,28 +191,74 @@ function getGeoStatus(infoElm, callback) {
 
 // 指定緯度経度での状態を表示
 function showGeoStatus(lat, lon) {
+  trackcount++;
+  $('trackcount').innerText = trackcount;
+
+  console.log(`showGeoStatus: ${lat}, ${lon}`);
   const colrow = calcColRow(lat, lon);
   const xy = toXY(colrow);
+  const x = xy[0];
+  const y = xy[1];
+  console.log(`  => colrow=${colrow}, xy=${xy}`);
+  const address = toLocationString(colrow);
   $('latlon').value = `${lat}, ${lon}`;
-  $('southwest').innerText = toLocationString(colrow);
-  $('xy').innerText = `${xy[0]},${xy[1]}`;
-  setPadXY(xy[0], xy[1]);
+  $('southwest').innerText = address;
+  $('xy').innerText = `${x},${y}`;
+
+  currentXpos = x;
+  currentYpos = y;
+  $('address').innerText = address;
+  $('instname').innerText = (y >= 0) ? instruments[y] : "";
+  $('beatno').innerText = (colrow[1] >= 0) ? (colrow[0] + 1) : "";
+  if (x >= 0) {
+    $('padproperty').style.display = "block";
+    setPadstatus();
+  } else {
+    $('padproperty').style.display = "none";
+  }
+  setPadCursor(xy[0], xy[1]);
 }
 
-// 手動で緯度経度を指定して計算するデバッグ処理
-$('btnManual').addEventListener('click', () => {
-  const latlonStr = $('latlon').value.split(',').map(s => s.trim());
-  const lat = parseFloat(latlonStr[0]);
-  const lon = parseFloat(latlonStr[1]);
-  showGeoStatus(lat, lon);
-});
+// 指定緯度経度での状態を表示
+function clearGeoStatus() {
+  //$('latlon').value = `${lat}, ${lon}`;
+  $('southwest').innerText = "";
+  $('xy').innerText = "";
+  setPadCursor(-1, -1);
+}
 
-// 現在の位置情報取得ボタン
-$('btnGeo').addEventListener('click', () => {
-  getGeoStatus($('geoStatus'), (lat, lon) => {
-    showGeoStatus(lat, lon);
-  });
-});
+let trackcount = 0;
+
+function startTrackingGeo() {
+  if ($('fakeLocation').checked) {
+    trackingFakeGeo();
+  } else {
+    getGeoStatus($('geoStatus'), (lat, lon) => {
+      // TODO 間引き処理
+      showGeoStatus(lat, lon);
+    });
+  }
+}
+
+function trackingFakeGeo() {
+  // Fake位置情報を使用
+  const latlonStr = $('latlon').value.split(',').map(s => s.trim());
+  let lat = parseFloat(latlonStr[0]);
+  let lon = parseFloat(latlonStr[1]);
+  if ($('fakeMoving').checked) {
+    // Fake移動
+    lat = LR[0] + Math.random() * (UL[0] - LR[0]);
+    lon = LL[1] + Math.random() * (UR[1] - LL[1]);
+    $('latlon').value = `${lat}, ${lon}`;
+  }
+  showGeoStatus(lat, lon);
+
+  setTimeout(trackingFakeGeo, 2000);
+}
+
+// 位置情報取得ボタン
+$('btnGeo').addEventListener('click', startTrackingGeo);
+
 
 // 起動時にサンプル座標で一回判定
 console.log($('latlon').value);

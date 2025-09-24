@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Tone.js Drum Sequencer</title>
+  <title>SapporoSequencer</title>
   <script src="https://cdn.jsdelivr.net/npm/tone@14.8.49/build/Tone.js"></script>
   <script type="text/javascript" src="three.min.js"></script>
   <script type="text/javascript" src="ThreePiece.js"></script>
@@ -25,10 +25,13 @@
   <!-- div id="startBtnDiv"><button id="startBtn">Start</button></div -->
 
   <div id="debugpanel">
-    <button id="btnGeo">現在地</button>　<span id="geoStatus"></span>
+    <button id="btnGeo">位置情報取得</button>　<span id="geoStatus"></span>　
     <br /><br />
-    <button id="btnManual">指定座標</button>
-    <br /><br />
+    <input type="checkbox" id="fakeLocation" checked />Fake位置情報
+    <input type="checkbox" id="fakeMoving" checked />Fake移動
+    <br />
+    <div id="trackcount"></div>
+    <br />
     緯度(lat),経度(lon): <br />
     <input id="latlon" value="43.0585,141.3518">
     <br /><br />
@@ -41,6 +44,13 @@
 
   <div id="bpminput">
     BPM: <input id="bpmval" type="number" name="bpmval" value="120" min="60" max="180"/>
+  </div>
+
+  <div id="padproperty">
+    <div class="props" id="addressdiv">Address:　<span class="propval" id="address">S2W5</span></div>
+    <div class="props" id="instnamediv">Instrument:　<span class="propval" id="instname">CLAP</span></div>
+    <div class="props" id="beatnodiv">Beat No:　<span class="propval" id="beatno">2</span></div>
+    <div id="padstatus">OFF</div>
   </div>
 
   <script type="text/javascript" src="3dpad.js"></script>

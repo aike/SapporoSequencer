@@ -116,20 +116,7 @@ button {
   z-index: 10000;
 }
 
-
-#bpm {
-
-  /*
-  position: absolute;
-  top: 195px;
-  left: 565px;
-  width: 32px;
-  height: 25px;
-  background-color: rgba(255,255,255,0.0);
-  z-index: 10000;
-  */
-}
-
+/* BPM input balloon */
 #bpminput {
   display: none;
   position: absolute;
@@ -142,6 +129,7 @@ button {
   background-repeat: no-repeat;
 }
 
+/* BPM input box inside the balloon */
 #bpmval {
   margin-top: 18px;
   width: 55px;
@@ -150,17 +138,47 @@ button {
   margin-left: 5px;
 }
 
-button {
-  width: 100px;
-  height: 30px;
-  font-size: 14px;
-  padding: 0;
+#padproperty {
+  position: absolute;
+  top: 530px;
+  left: 100px;
+  width: 670px;
+  height: 100px;
+  border-radius: 4px;
+  padding: 20px 40px;
+  text-align: left;
+  font-size: 16px;
+  color: #ccc;
+  background-color: #333355;
 }
 
-#latlon {
-  width: 340px;
-  height: 30px;
+#padstatus {
+  position: absolute;
+  top: 20px;
+  left: 300px;
+  font-size: 24px;
+  font-weight: bold;
+  width: 80px;
+  height: 60px;
+  border: #bbb 1px solid;
+  border-radius: 4px;
+  background-color: #1db954;
+  text-align:center;
+  padding: 20px 0 0 0;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.props {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-top: 6px;
   font-size: 18px;
+  color: #ccf;
+}
+
+.propval {
+  color: #fff;
 }
 
 
@@ -170,9 +188,25 @@ button {
   left: 1000px;
   width: 350px;
   height: 250px;
-  padding: 10px;
+  padding: 20px;
   text-align: left;
   font-size: 14px;
   color: #ccc;
   background-color: #001122;
 }
+
+/* debug panel items */
+button {
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  padding: 0;
+}
+
+/* debug panel items */
+#latlon {
+  width: 340px;
+  height: 30px;
+  font-size: 18px;
+}
+

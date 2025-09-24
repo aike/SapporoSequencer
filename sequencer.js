@@ -91,3 +91,36 @@ document.getElementById("bpmval").addEventListener("change", () => {
     Tone.Transport.bpm.value = Math.floor(bpm / 2);
   }
 });
+
+let currentXpos = -1;
+let currentYpos = -1;
+
+function setPadstatus() {
+  const x = currentXpos;
+  const y = currentYpos;
+
+  // Property パネル更新
+  if (steps[y][x]) {
+    $('padstatus').innerText = "ON";
+    $('padstatus').style.backgroundColor = "#" + padcolor[1][y].toString(16).padStart(6, '0');
+    $('padstatus').style.color = "#ffffff";
+  } else {
+    $('padstatus').innerText = "OFF";
+    $('padstatus').style.backgroundColor = "#" + padcolor[0][y].toString(16).padStart(6, '0');
+    $('padstatus').style.color = "#666666";
+  }
+
+  // 3D パッド更新
+  var o = t.obj("p" + x + "_" + y);
+  if (steps[y][x]) {
+    o.material.color.set(padcolor[1][y]);
+  } else {
+    o.material.color.set(padcolor[0][y]);
+  }
+  t.setDirty();
+}
+
+document.getElementById("padstatus").addEventListener(click, () => {
+  steps[currentYpos][currentXpos] = !steps[currentYpos][currentXpos];
+  setPadstatus();
+});
