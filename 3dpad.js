@@ -79,3 +79,17 @@ function setPadCursor(x, y) {
     t.setDirty();
   }
 }
+
+function showSteps() {
+  for (var y = 0; y < 6; y++) {
+    for (var x = 0; x < 8; x++) {
+      var o = t.obj("p" + x + "_" + y);
+      if (steps[y][x]) {
+        o.material.color.set(padcolor[1][y]);
+      } else {
+        o.material.color.set(padcolor[0][y]);
+      }
+    }
+  }
+  t.setDirty();
+}

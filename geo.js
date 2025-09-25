@@ -13,17 +13,36 @@ const georows = 12;
 const geocols = 8;
 
 const $ = (id) => document.getElementById(id);
+
+let url_string = window.location.href;
+// 文字列としてのURLをURLオブジェクトに変換する。
+let url = new URL(url_string);
+// URLオブジェクトのsearchParamsのget関数でIDがdの値を取得する。
+let demo = url.searchParams.get("demo");
+
+
 if (debug) {
   $('grid').style.display = "grid";
   $('debugpanel').style.display = "block";
   $('fakeLocation').checked = true;
-  console.log($('fakeLocation').checked);
+} else if (demo) {
+  $('grid').style.display = "none";
+  $('debugpanel').style.display = "none";
+  $('fakeLocation').checked = true;
+  $('fakeMoving').checked = true;
+  steps[0] = [1,0,0,0, 1,0,0,0];
+  steps[1] = [0,0,1,0, 0,0,1,0];
+  steps[2] = [0,1,0,1, 0,1,0,1];
+  steps[5] = [1,0,1,0, 1,0,1,0];
+  showSteps();
+  setTimeout(trackingFakeGeo, 1000);
 } else {
   $('grid').style.display = "none";
   $('debugpanel').style.display = "none";
   $('fakeLocation').checked = false;
   startTrackingGeo();
 }
+
 
 // 与えられた四隅（[lat, lon]） ※x=lon, y=lat で扱う(latitude=緯度=縦方向, longitude=経度=横方向)
 const UL = [43.0612055051849, 141.34356396606748];
@@ -267,7 +286,7 @@ function trackingFakeGeo() {
   }
   showGeoStatus(lat, lon);
 
-  setTimeout(trackingFakeGeo, 2000);
+  setTimeout(trackingFakeGeo, 3000);
 }
 
 // 位置情報取得ボタン
