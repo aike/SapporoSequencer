@@ -30,9 +30,9 @@ if (debug) {
   $('debugpanel').style.display = "none";
   $('fakeLocation').checked = true;
   $('fakeMoving').checked = true;
-  steps[0] = [1,0,0,0, 1,0,0,0];
-  steps[1] = [0,0,1,0, 0,0,1,0];
+  steps[0] = [1,0,0,0, 0,0,0,0];
   steps[2] = [0,1,0,1, 0,1,0,1];
+  steps[3] = [0,0,1,0, 0,0,1,0];
   steps[5] = [1,0,1,0, 1,0,1,0];
   showSteps();
   setTimeout(trackingFakeGeo, 1000);

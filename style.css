@@ -9,7 +9,7 @@ body {
 
 #labels {
   position: absolute;
-  top: -80px;
+  top: 0px;
   left: 0px;
   width: 1000px;
   height: 667px;
@@ -21,7 +21,7 @@ body {
 
 #bg {
   position: absolute;
-  top: -80px;
+  top: 0px;
   left: 0px;
   width: 1000px;
   height: 667px;
@@ -34,7 +34,7 @@ body {
 
 #pad {
   position: absolute;
-  top: -80px;
+  top: 0px;
   left: 0px;
   z-index: -3;
 }
@@ -47,12 +47,12 @@ body {
   z-index: 1000;
 }
 
-#s_sy { top: 210px; left: 167px; font-size: 12px; }
-#s_bs { top: 245px; left: 145px; font-size: 15px; }
-#s_hh { top: 290px; left: 105px; font-size: 17px; }
-#s_cl { top: 340px; left: 88px; font-size: 20px; }
-#s_sd { top: 400px; left: 42px; font-size: 22px; }
-#s_bd { top: 465px; left: 15px; font-size: 28px; }
+#s_sy { top: 290px; left: 167px; font-size: 12px; }
+#s_bs { top: 325px; left: 145px; font-size: 15px; }
+#s_hh { top: 370px; left: 105px; font-size: 17px; }
+#s_cl { top: 420px; left: 88px; font-size: 20px; }
+#s_sd { top: 480px; left: 42px; font-size: 22px; }
+#s_bd { top: 545px; left: 15px; font-size: 28px; }
 
 
 
@@ -88,7 +88,7 @@ button {
 /* transparent button over the START/STOP button */
 #startstop {
   position: absolute;
-  top: 110px;
+  top: 190px;
   left: 385px;
   width: 120px;
   height: 50px;
@@ -99,10 +99,10 @@ button {
 /* transparent button over the BPM balloon */
 #bpm {
   position: absolute;
-  top: 180px;
-  left: 620px;
-  width: 45px;
-  height: 35px;
+  top: 250px;
+  left: 610px;
+  width: 65px;
+  height: 60px;
   background-color: rgba(255,255,255,0.0);
   z-index: 10000;
 }
@@ -111,30 +111,33 @@ button {
 #bpminput {
   display: none;
   position: absolute;
-  top: 100px;
-  left: 580px;
-  width: 150px;
-  height: 112px;
+  top: 125px;
+  left: 630px;
+  width: 220px;
+  height: 170px;
   background-image: url(balloon.png);
-  background-size: 150px 112px;
+  background-size: 220px 170px;
   background-repeat: no-repeat;
+  font-size: 25px;
+  text-align: left;
+  padding: 5px 0px 0px 20px;
 }
 
 /* BPM input box inside the balloon */
 #bpmval {
   margin-top: 18px;
-  width: 55px;
-  font-size: 18px;
+  width: 65px;
+  font-size: 25px;
   text-align: right;
   margin-left: 5px;
 }
 
 #padproperty {
   position: absolute;
-  top: 610px;
-  left: 250px;
-  width: 400px;
-  height: 100px;
+  top: 720px;
+  left: 100px;
+  width: 700px;
+  height: 150px;
   border-radius: 4px;
   padding: 20px 40px;
   text-align: left;
@@ -145,26 +148,26 @@ button {
 
 #padstatus {
   position: absolute;
-  top: 20px;
-  left: 300px;
-  font-size: 24px;
+  top: 25px;
+  left: 500px;
+  font-size: 38px;
   font-weight: bold;
-  width: 80px;
-  height: 60px;
+  width: 120px;
+  height: 90px;
   border: #bbb 1px solid;
   border-radius: 4px;
   background-color: #1db954;
   text-align:center;
-  padding: 20px 0 0 0;
+  padding: 30px 0 0 0;
   margin-top: 10px;
   cursor: pointer;
 }
 
 .props {
   margin-top: 20px;
-  margin-left: 20px;
+  margin-left: 80px;
   margin-top: 6px;
-  font-size: 18px;
+  font-size: 28px;
   color: #ccf;
 }
 
