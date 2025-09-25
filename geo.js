@@ -14,7 +14,7 @@ const geocols = 8;
 
 const $ = (id) => document.getElementById(id);
 if (debug) {
-  $('grid').style.display = "block";
+  $('grid').style.display = "grid";
   $('debugpanel').style.display = "block";
   $('fakeLocation').checked = true;
   console.log($('fakeLocation').checked);
@@ -168,7 +168,7 @@ function toLocationString(colrow) {
   //const cho = ["西8","西7","西6","西5","西4","西3","西2","西1"];
   const jo  = ["N1","N1","Odori","Odori","S1","S1","S1","S2","S2","S2","S3","S3"];
   const cho = ["W8","W7","W6","W5","W4","W3","W2","W1"];
-  return jo[row] + cho[col];
+  return jo[row] + " " + cho[col];
 }
 
 function toXY(colrow) {

@@ -3,10 +3,9 @@ const padcolor = [
   [0x000022, 0x001122, 0x002222, 0x002200, 0x221100, 0x220000],
   [0x0000ff, 0x004488, 0x008844, 0x00ff00, 0x884400, 0xff0000]
 ];
-const instruments = ["SYNTH", "BASS", "HH", "CLAP", "SD", "BD"];
+const instruments = ["SYNTH", "BASS", "HI-HAT", "CLAP", "SNARE", "KICK"];
 
-
-var t = new ThreePiece("pad", 1500/2, 1000/2);
+var t = new ThreePiece("pad", 1000, 667);
 var r = -Math.PI / 2;
 var data = [
   //{obj:"PerspectiveCamera",  x:0, y:1.4, z:1.95, rx:-0.7, rz: 0.04},
