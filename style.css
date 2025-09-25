@@ -58,11 +58,13 @@ body {
 
 
 #grid {
+/*  display: grid; */
+  display: none;
+
   position: absolute;
   top: 0px;
   left: 1000px;
 
-  display: grid;
   grid-template-columns: repeat(8, 40px);
   grid-template-rows: repeat(6, 40px);
   gap: 4px;
@@ -79,16 +81,6 @@ body {
 
 .pad.on { background: #1db954; }
 .pad.active { outline: 2px solid yellow; }
-
-#startBtnDiv {
-  position: absolute;
-  top: 530px;
-  left: 100px;
-  background: #444;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
 
 button { 
   padding: 8px 20px; 
@@ -183,6 +175,8 @@ button {
 
 
 #debugpanel {
+  display: none;
+
   position: absolute;
   top: 350px;
   left: 1000px;
