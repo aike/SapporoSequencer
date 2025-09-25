@@ -7,8 +7,23 @@
     端がちょうど1になる場合は最大インデックスにクランプ。
 */
 
+const debug = false;
+
 const georows = 12;
 const geocols = 8;
+
+const $ = (id) => document.getElementById(id);
+if (debug) {
+  $('grid').style.display = "block";
+  $('debugpanel').style.display = "block";
+  $('fakeLocation').checked = true;
+  console.log($('fakeLocation').checked);
+} else {
+  $('grid').style.display = "none";
+  $('debugpanel').style.display = "none";
+  $('fakeLocation').checked = false;
+  startTrackingGeo();
+}
 
 // 与えられた四隅（[lat, lon]） ※x=lon, y=lat で扱う(latitude=緯度=縦方向, longitude=経度=横方向)
 const UL = [43.0612055051849, 141.34356396606748];
@@ -126,7 +141,6 @@ function uvToTile(u, v, rows, cols) {
 }
 
 // UI 部分
-const $ = (id) => document.getElementById(id);
 const resultEl = $('result');
 const geoStatusEl = $('geoStatus');
 
