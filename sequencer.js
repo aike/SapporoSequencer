@@ -17,7 +17,7 @@ const players = new Tone.Players(
 ).toDestination();
 
 // === グリッド状態 ===
-const steps = Array.from({ length: rows }, () => Array(cols).fill(false));
+const steps = Array.from({ length: rows }, () => Array(cols).fill(0));
 
 const gridEl = document.getElementById("grid");
 
@@ -31,6 +31,7 @@ for (let r = 0; r < rows; r++) {
     pad.addEventListener("click", () => {
       steps[r][c] = !steps[r][c];
       pad.classList.toggle("on", steps[r][c]);
+      saveState();
     });
     gridEl.appendChild(pad);
   }
@@ -64,9 +65,8 @@ if (window.ontouchstart === null) {
 // === 再生ボタン ===
 document.getElementById("startstop").addEventListener(click, async () => {
   await Tone.start();
-  console.log(Tone.Transport.state);
   if (Tone.Transport.state !== "started") {
-    Tone.Transport.bpm.value = 70;
+    Tone.Transport.bpm.value = Math.floor(parseInt(document.getElementById('bpmval').value) / 2);
     cursor = 0;
     seq.start(0);
     Tone.Transport.start();
@@ -89,25 +89,27 @@ document.getElementById("bpmval").addEventListener("change", () => {
   const bpm = parseInt(document.getElementById("bpmval").value);
   if (!isNaN(bpm) && bpm >= 60 && bpm <= 180) {
     Tone.Transport.bpm.value = Math.floor(bpm / 2);
+    saveState();
   }
 });
 
 let currentXpos = -1;
 let currentYpos = -1;
 
+// currentXpos, currentYpos に基づいて Property パネルと 3D パッドを更新
 function setPadstatus() {
   const x = currentXpos;
   const y = currentYpos;
 
   // Property パネル更新
   if (steps[y][x]) {
-    $('padstatus').innerText = "ON";
-    $('padstatus').style.backgroundColor = "#" + padcolor[1][y].toString(16).padStart(6, '0');
-    $('padstatus').style.color = "#ffffff";
+    document.getElementById('padstatus').innerText = "ON";
+    document.getElementById('padstatus').style.backgroundColor = "#" + padcolor[1][y].toString(16).padStart(6, '0');
+    document.getElementById('padstatus').style.color = "#ffffff";
   } else {
-    $('padstatus').innerText = "OFF";
-    $('padstatus').style.backgroundColor = "#" + padcolor[0][y].toString(16).padStart(6, '0');
-    $('padstatus').style.color = "#666666";
+    document.getElementById('padstatus').innerText = "OFF";
+    document.getElementById('padstatus').style.backgroundColor = "#" + padcolor[0][y].toString(16).padStart(6, '0');
+    document.getElementById('padstatus').style.color = "#666666";
   }
 
   // 3D パッド更新
@@ -120,7 +122,42 @@ function setPadstatus() {
   t.setDirty();
 }
 
+// プロパティパネルのPadをタップしたとき
 document.getElementById("padstatus").addEventListener(click, () => {
   steps[currentYpos][currentXpos] = !steps[currentYpos][currentXpos];
   setPadstatus();
+  saveState();
 });
+
+
+function saveState() {
+  const state = {
+    steps: steps,
+    bpm: parseInt(document.getElementById('bpmval').value)
+  };
+  localStorage.setItem("song", JSON.stringify(state));
+  console.log("状態保存:");
+}
+
+function loadState() {
+  const data = localStorage.getItem("song");
+  if (data) {
+    try {
+      const parsed = JSON.parse(data);
+      if (parsed.steps && Array.isArray(parsed.steps)) {
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            steps[r][c] = parsed.steps[r][c];
+          }
+        }
+      }
+      if (parsed.bpm) {
+        Tone.Transport.bpm.value = Math.floor(parsed.bpm / 2);
+        document.getElementById('bpmval').value = parsed.bpm; // UIも反映
+      }
+      console.log("状態復帰:");
+    } catch(e){ console.warn("復帰失敗:", e); }
+  }
+}
+
+loadState();
