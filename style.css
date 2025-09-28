@@ -44,7 +44,12 @@ body {
   transform: skew(-30deg);
   color: #99b;
   font-weight: bold;
+  cursor: pointer;
   z-index: 1000;
+}
+
+.lbl.muted {
+  color: #557;
 }
 
 #s_sy { top: 290px; left: 167px; font-size: 12px; }

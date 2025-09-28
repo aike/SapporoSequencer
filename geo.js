@@ -7,18 +7,6 @@
     端がちょうど1になる場合は最大インデックスにクランプ。
 */
 
-const debug = false;
-
-const georows = 12;
-const geocols = 8;
-
-const $ = (id) => document.getElementById(id);
-
-let url_string = window.location.href;
-// 文字列としてのURLをURLオブジェクトに変換する。
-let url = new URL(url_string);
-// URLオブジェクトのsearchParamsのget関数でIDがdの値を取得する。
-let demo = url.searchParams.get("demo");
 
 
 if (debug) {
@@ -30,10 +18,13 @@ if (debug) {
   $('debugpanel').style.display = "none";
   $('fakeLocation').checked = true;
   $('fakeMoving').checked = true;
-  steps[0] = [1,0,0,0, 0,0,0,0];
+  steps[0] = [1,0,0,0, 1,0,1,1];
+  steps[1] = [0,1,0,1, 0,1,0,1];
   steps[2] = [0,1,0,1, 0,1,0,1];
   steps[3] = [0,0,1,0, 0,0,1,0];
   steps[5] = [1,0,1,0, 1,0,1,0];
+  synth.sequence = [2,0,0,0, 3,0,2,0];
+  synthBass.sequence = [0,0,0,0, 2,5,2,6];
   showSteps();
   setTimeout(trackingFakeGeo, 1000);
 } else {
@@ -297,4 +288,4 @@ $('btnGeo').addEventListener('click', startTrackingGeo);
 console.log($('latlon').value);
 const latlonStr = $('latlon').value.split(',').map(s => s.trim());
 showGeoStatus(parseFloat(latlonStr[0]), parseFloat(latlonStr[1]));
-
+showSteps();
