@@ -26,7 +26,7 @@ synth.lfo.frequency.value = 0.4;
 synth.lfo.min = 800;
 synth.lfo.max = 2000;
 const synthBass = new Synth(-8, false);
-synthBass.setNoteTable(["A1","A1","A1","A1","C2","D2","E2","E2","G2","A3"]);
+synthBass.setNoteTable(["A1","A1","A1","A1","C2","D2","E2","E2","E2","G2"]);
 
 // === グリッド状態 ===
 const steps = Array.from({ length: rows }, () => Array(cols).fill(0));
@@ -193,6 +193,18 @@ document.getElementById("padstatus").addEventListener(click, () => {
 });
 
 
+function showDebugSteps() {
+  // Debugパッド生成
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const pad = document.querySelector('.pad[data-row="' + r + '"][data-col="' + c + '"]');
+      if (steps[r][c]) {
+        pad.classList.add("on");
+      }
+    }
+  }
+}
+
 function saveState() {
   const state = {
     steps: steps,
@@ -200,12 +212,21 @@ function saveState() {
     synthseq: synth.sequence,
     bassseq: synthBass.sequence
   };
-  localStorage.setItem("song", JSON.stringify(state));
+  if (debug) {
+    localStorage.setItem("debugsong", JSON.stringify(state));
+  } else {
+    localStorage.setItem("song", JSON.stringify(state));
+  }
   console.log("状態保存:");
 }
 
 function loadState() {
-  const data = localStorage.getItem("song");
+  let data;
+  if (debug) {
+    data = localStorage.getItem("debugsong");
+  } else {
+    data = localStorage.getItem("song");
+  }
   if (data) {
     try {
       const parsed = JSON.parse(data);
@@ -233,5 +254,6 @@ function loadState() {
 
 if (!demo) {
   loadState();
+  showDebugSteps();
 }
 

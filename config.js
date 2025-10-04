@@ -1,5 +1,3 @@
-const debug = false;
-
 const georows = 12;
 const geocols = 8;
 
@@ -7,5 +5,7 @@ const geocols = 8;
 const $ = (id) => document.getElementById(id);
 let url_string = window.location.href;
 let url = new URL(url_string);
+
 let demo = url.searchParams.get("demo");
+let debug = url.searchParams.get("debug");
 
