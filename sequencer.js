@@ -51,6 +51,9 @@ for (let r = 0; r < rows; r++) {
         }
       }
       pad.classList.toggle("on", steps[r][c]);
+      if (debug) {
+        setPadCursor(c, r);
+      }
       saveState();
     });
     gridEl.appendChild(pad);
@@ -92,7 +95,7 @@ if (window.ontouchstart === null) {
 }
 
 // === 再生ボタン ===
-document.getElementById("startstop").addEventListener(click, async () => {
+async function startstop() {
   await Tone.start();
   synth.startAudio();
   synthBass.startAudio();
@@ -106,6 +109,11 @@ document.getElementById("startstop").addEventListener(click, async () => {
     Tone.Transport.stop();
     showSteps();
   }
+
+}
+
+document.getElementById("startstop").addEventListener(click, () => {
+  startstop();  
 });
 
 document.getElementById("bpm").addEventListener(click, () => {
@@ -150,6 +158,29 @@ document.getElementById("s_bd").addEventListener(click, () => {
   document.getElementById("s_bd").classList.toggle("muted", mute[5]);
 });
 
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      startstop();
+    } else if (e.code === 'Digit1') {
+      mute[0] = !mute[0];
+      document.getElementById("s_sy").classList.toggle("muted", mute[0]);
+    } else if (e.code === 'Digit2') {
+      mute[1] = !mute[1];
+      document.getElementById("s_bs").classList.toggle("muted", mute[1]);
+    } else if (e.code === 'Digit3') {
+      mute[2] = !mute[2];
+      document.getElementById("s_hh").classList.toggle("muted", mute[2]);
+    } else if (e.code === 'Digit4') {
+      mute[3] = !mute[3];
+      document.getElementById("s_cl").classList.toggle("muted", mute[3]);
+    } else if (e.code === 'Digit5') {
+      mute[4] = !mute[4];
+      document.getElementById("s_sd").classList.toggle("muted", mute[4]);
+    } else if (e.code === 'Digit6') {
+      mute[5] = !mute[5];
+      document.getElementById("s_bd").classList.toggle("muted", mute[5]); 
+    }
+  });
 
 
 // currentXpos, currentYpos に基づいて Property パネルと 3D パッドを更新
