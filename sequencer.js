@@ -52,7 +52,10 @@ for (let r = 0; r < rows; r++) {
       }
       pad.classList.toggle("on", steps[r][c]);
       if (debug) {
+        currentXpos = c;
+        currentYpos = r;
         setPadCursor(c, r);
+        setPadstatus();
       }
       saveState();
     });
@@ -187,6 +190,10 @@ document.getElementById("s_bd").addEventListener(click, () => {
 function setPadstatus() {
   const x = currentXpos;
   const y = currentYpos;
+  const address = toLocationString([x, y * 2 + 1]);
+  $('address').innerText = address;
+  $('instname').innerText = (y >= 0) ? instruments[y] : "";
+  $('beatno').innerText = (y >= 0) ? (x + 1) : "";
 
   // Property パネル更新
   if (steps[y][x]) {
