@@ -52,12 +52,12 @@ body {
   color: #557;
 }
 
-#s_sy { top: 290px; left: 167px; font-size: 12px; }
-#s_bs { top: 325px; left: 145px; font-size: 15px; }
-#s_hh { top: 370px; left: 105px; font-size: 17px; }
-#s_cl { top: 420px; left: 88px; font-size: 20px; }
-#s_sd { top: 480px; left: 42px; font-size: 22px; }
-#s_bd { top: 545px; left: 15px; font-size: 28px; }
+#s_sy { top: 298px; left: 156px; font-size: 12px; }
+#s_bs { top: 335px; left: 138px; font-size: 15px; }
+#s_hh { top: 375px; left: 101px; font-size: 17px; }
+#s_cl { top: 430px; left: 81px; font-size: 20px; }
+#s_sd { top: 490px; left: 32px; font-size: 22px; }
+#s_bd { top: 555px; left: 10px; font-size: 28px; }
 
 
 
@@ -93,8 +93,8 @@ button {
 /* transparent button over the START/STOP button */
 #startstop {
   position: absolute;
-  top: 190px;
-  left: 385px;
+  top: 183px;
+  left: 360px;
   width: 120px;
   height: 50px;
   background-color: rgba(255,255,255,0.0);
@@ -104,8 +104,8 @@ button {
 /* transparent button over the BPM balloon */
 #bpm {
   position: absolute;
-  top: 250px;
-  left: 610px;
+  top: 240px;
+  left: 585px;
   width: 65px;
   height: 60px;
   background-color: rgba(255,255,255,0.0);
@@ -116,8 +116,8 @@ button {
 #bpminput {
   display: none;
   position: absolute;
-  top: 125px;
-  left: 630px;
+  top: 115px;
+  left: 605px;
   width: 220px;
   height: 170px;
   background-image: url(balloon.png);

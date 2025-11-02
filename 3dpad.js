@@ -9,11 +9,11 @@ var t = new ThreePiece("pad", 1000, 667);
 var r = -Math.PI / 2;
 var data = [
   //{obj:"PerspectiveCamera",  x:0, y:1.4, z:1.95, rx:-0.7, rz: 0.04},
-  {obj:"PerspectiveCamera",  x:0.0, y:1.3, z:2, rx:-0.65, ry:-0.01, rz: 0.04},
+  {obj:"PerspectiveCamera",  x:-0.02, y:1.35, z:1.98, rx:-0.68, ry:-0.059, rz: 0.02},
 ];
 
-var py = 0.87;
-var px = 0.96;
+var py = 0.85;
+var px = 0.94;
 
 // グリッド線
 for (var i = 0; i <= 30; i++) {
@@ -26,7 +26,7 @@ for (var i = 0; i <= 30; i++) {
 for (y = 0; y < 6; y++) {
   for (x = 0; x < 8; x++) {
     var nm = "p"+x+"_"+y;
-    data.push({obj:"Plane", name:nm, x: x*px-3, z:y*py+0.9, w:px*0.85, h:py*0.85, rx: r, col:padcolor[0][y]});
+    data.push({obj:"Plane", name:nm, x: x*px-2.95, z:y*py+1.05, w:px*0.85, h:py*0.85, rx: r, col:padcolor[0][y]});
   }
 }
 
@@ -73,8 +73,8 @@ function setPadCursor(x, y) {
     if (x < 0) {
       o.position.z = 100; // 見えないところに隠す
     } else {
-      o.position.x = x * px - 3;
-      o.position.z = y * py + 0.9;  
+      o.position.x = x * px - 2.95;
+      o.position.z = y * py + 1.05;  
     }
     t.setDirty();
   }
