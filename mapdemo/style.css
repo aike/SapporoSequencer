@@ -52,13 +52,12 @@ body {
   color: #557;
 }
 
-#s_sy { top: 298px; left: 156px; font-size: 11px; }
-#s_bs { top: 335px; left: 138px; font-size: 14px; }
+#s_sy { top: 298px; left: 154px; font-size: 11px; }
+#s_bs { top: 335px; left: 136px; font-size: 14px; }
 #s_hh { top: 375px; left: 101px; font-size: 16px; }
 #s_cl { top: 430px; left: 79px; font-size: 19px; }
 #s_sd { top: 490px; left: 32px; font-size: 21px; }
 #s_bd { top: 555px; left: 10px; font-size: 27px; }
-
 
 
 #grid {
