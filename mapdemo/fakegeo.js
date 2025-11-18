@@ -27,57 +27,29 @@ function toXY(colrow) {
 async function poll() {
   try {
     const response = await fetch('geodata');
-    console.log(response);
+    //console.log("Fetched geodata");
+    const text = await response.text();
+    const colrow = JSON.parse(text);
+    showGeoStatus(colrow);
+    //console.log(text);
   } catch (e) {
     console.error(e);
   } finally {
-//    setTimeout(poll, 1000);
+    setTimeout(poll, 1000);
   }
 }
 
-
-/*
-// Geolocation API で現在地を取得。非同期処理なので結果はcallback(lat, lon)で受け取る
-function getGeoStatus(infoElm, callback) {
-  if (!('geolocation' in navigator)) {
-    infoElm.textContent = 'このブラウザは Geolocation に非対応です。';
-    return;
-  }
-  infoElm.textContent = '現在地を取得中...';
-//  navigator.geolocation.getCurrentPosition(
-  navigator.geolocation.watchPosition(
-    (pos) => {
-      const lat = pos.coords.latitude;
-      const lon = pos.coords.longitude;
-      infoElm.textContent = `取得成功（精度±${Math.round(pos.coords.accuracy)}m）`;
-      callback(lat, lon);
-    },
-    (err) => {
-      infoElm.textContent = `取得失敗: ${err.message}`;
-      clearGeoStatus();
-    },
-    {
-      enableHighAccuracy: true,
-      timeout: 3000,
-      maximumAge: 0,
-    }
-  );
-}
-*/
 
 // 指定緯度経度での状態を表示
 function showGeoStatus(colrow) {
   trackcount++;
   $('trackcount').innerText = trackcount;
 
-  //console.log(`showGeoStatus: ${lat}, ${lon}`);
-  //const colrow = calcColRow(lat, lon);
   const xy = toXY(colrow);
   const x = xy[0];
   const y = xy[1];
   console.log(`  => colrow=${colrow}, xy=${xy}`);
   const address = toLocationString(colrow);
-  //$('latlon').value = `${lat}, ${lon}`;
   $('southwest').innerText = address;
   $('xy').innerText = `${x},${y}`;
 
@@ -97,7 +69,6 @@ function showGeoStatus(colrow) {
 
 // 指定緯度経度での状態を表示
 function clearGeoStatus() {
-  //$('latlon').value = `${lat}, ${lon}`;
   $('southwest').innerText = "";
   $('xy').innerText = "";
   setPadCursor(-1, -1);
@@ -111,7 +82,6 @@ function startTrackingGeo() {
 
 
 // 起動時にサンプル座標で一回判定
-console.log($('latlon').value);
 const latlonStr = $('latlon').value.split(',').map(s => s.trim());
-showGeoStatus([1, 2]);
+showGeoStatus([-1, -1]);
 showSteps();

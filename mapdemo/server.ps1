@@ -16,6 +16,10 @@ try{
     start ($urlRoot + $IndexPage)
   }
 
+  $row = -1
+  $col = -1
+  $geodata = "[${row},${col}]"
+
   while ($true){
     $ctx = $listener.GetContext()
     if (-not $ctx.Request.isLocal) {
@@ -30,10 +34,6 @@ try{
     if (!$path) {
       $path = $IndexPage
     }
-
-    $row = -1
-    $col = -1
-    $geodata = "[${row},${col}]"
 
     $fullPath = [IO.Path]::Combine($parentPath, $path)
     $content = [byte[]]@()
@@ -93,7 +93,10 @@ try{
       'pad/56' { $row = 5; $col = 6; $geodata = "[${row},${col}]" }
       'pad/57' { $row = 5; $col = 7; $geodata = "[${row},${col}]" }  
 
-      'geodata'{ $content = [System.Text.Encoding]::UTF8.GetBytes($geodata) }
+      'geodata'{ 
+        "get geodata"|oh
+        $content = [System.Text.Encoding]::UTF8.GetBytes($geodata) 
+      }
 
       Default {
         if ([IO.File]::Exists($fullPath)) {
@@ -103,6 +106,8 @@ try{
         }
       }
     }
+    $path |oh
+    "set data [${row},${col}]"|oh
 
     $res.OutputStream.Write($content, 0, $content.Length)
     $res.Close()

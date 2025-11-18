@@ -35,6 +35,23 @@
   const x0 = 160;
   const y0 = 130;
 
+  const xhr = new XMLHttpRequest();
+  const url = 'http://localhost:3000';
+  xhr.addEventListener('readystatechange', () => {
+    if( xhr.readyState === 4 && xhr.status === 200) {
+      if (xhr.responseText.slice(0, 1) === '[') {
+        setButtons(xhr.responseText);
+      }
+    }
+  });
+
+  function send(s)
+  {
+    console.log(url + s);
+    xhr.open( 'get', url + s);
+    xhr.send();
+  }
+
   for (let r = 0; r < 6; r++) {
     for (let c = 0; c < 8; c++) {
       let div = document.createElement('div');
@@ -45,6 +62,10 @@
       div.style.top = String(y0 + r * 110) + 'px';
       div.style.width = String(w - 10) + 'px';
       div.style.height = String(100) + 'px';
+      div.onclick = () => {
+        console.log(`/pad/${r}${c} clicked`);
+        send(`/pad/${r}${c}`);
+      };
       document.querySelector('body').appendChild(div);
     }
   }
