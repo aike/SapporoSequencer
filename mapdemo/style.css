@@ -1,0 +1,213 @@
+
+body {
+  font-family: sans-serif;
+  background-color: #001;
+  color: #fff;
+  text-align: center; 
+}
+
+
+#labels {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 1000px;
+  height: 667px;
+  background-image: url(label.png);
+  background-size: 1000px 667px;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+#bg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 1000px;
+  height: 667px;
+  background-image: url(bg.png);
+  background-size: 1000px 667px;
+  background-repeat: no-repeat;
+  z-index: -2;
+  opacity: 0.5;
+}
+
+#pad {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -3;
+}
+
+.lbl {
+  position: absolute;
+  transform: skew(-30deg);
+  color: #99b;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.lbl.muted {
+  color: #557;
+}
+
+#s_sy { top: 298px; left: 156px; font-size: 12px; }
+#s_bs { top: 335px; left: 138px; font-size: 15px; }
+#s_hh { top: 375px; left: 101px; font-size: 17px; }
+#s_cl { top: 430px; left: 81px; font-size: 20px; }
+#s_sd { top: 490px; left: 32px; font-size: 22px; }
+#s_bd { top: 555px; left: 10px; font-size: 28px; }
+
+
+
+#grid {
+  display: grid; 
+/*  display: none; */
+
+  position: absolute;
+  top: 0px;
+  left: 1040px;
+
+  grid-template-columns: repeat(8, 40px);
+  grid-template-rows: repeat(6, 40px);
+  gap: 4px;
+  margin: 30px auto;
+  width: max-content;
+}
+.pad {
+  width: 40px; height: 40px;
+  background: #444;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pad.on { background: #1db954; }
+.pad.active { outline: 2px solid yellow; }
+
+button { 
+  padding: 8px 20px; 
+}
+
+/* transparent button over the START/STOP button */
+#startstop {
+  position: absolute;
+  top: 183px;
+  left: 360px;
+  width: 120px;
+  height: 50px;
+  background-color: rgba(255,255,255,0.0);
+  z-index: 10000;
+}
+
+/* transparent button over the BPM balloon */
+#bpm {
+  position: absolute;
+  top: 240px;
+  left: 585px;
+  width: 65px;
+  height: 60px;
+  background-color: rgba(255,255,255,0.0);
+  z-index: 10000;
+}
+
+/* BPM input balloon */
+#bpminput {
+  display: none;
+  position: absolute;
+  top: 115px;
+  left: 605px;
+  width: 220px;
+  height: 170px;
+  background-image: url(balloon.png);
+  background-size: 220px 170px;
+  background-repeat: no-repeat;
+  font-size: 25px;
+  text-align: left;
+  padding: 5px 0px 0px 20px;
+}
+
+/* BPM input box inside the balloon */
+#bpmval {
+  margin-top: 18px;
+  width: 65px;
+  font-size: 25px;
+  text-align: right;
+  margin-left: 5px;
+}
+
+#padproperty {
+  position: absolute;
+  top: 720px;
+  left: 100px;
+  width: 700px;
+  height: 150px;
+  border-radius: 4px;
+  padding: 20px 40px;
+  text-align: left;
+  font-size: 16px;
+  color: #ccc;
+  background-color: #222244;
+}
+
+#padstatus {
+  position: absolute;
+  top: 25px;
+  left: 500px;
+  font-size: 38px;
+  font-weight: bold;
+  width: 120px;
+  height: 90px;
+  border: #bbb 1px solid;
+  border-radius: 4px;
+  background-color: #1db954;
+  text-align:center;
+  padding: 30px 0 0 0;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.props {
+  margin-top: 20px;
+  margin-left: 80px;
+  margin-top: 6px;
+  font-size: 28px;
+  color: #ccf;
+}
+
+.propval {
+  color: #fff;
+}
+
+
+#debugpanel {
+/*  display: none; */
+
+  position: absolute;
+  top: 330px;
+  left: 1040px;
+  width: 350px;
+  height: 250px;
+  padding: 20px;
+  text-align: left;
+  font-size: 14px;
+  color: #ccc;
+  background-color: #001122;
+}
+
+/* debug panel items */
+button {
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  padding: 0;
+}
+
+/* debug panel items */
+#latlon {
+  width: 340px;
+  height: 30px;
+  font-size: 18px;
+}
+

@@ -1,0 +1,56 @@
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>Map Demo</title>
+<style>
+#mapphoto {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 1600px;
+}
+
+.tile {
+  position: absolute;
+  background-color: rgba(255,255,255,0.0);
+}
+
+.tile:hover {
+  position: absolute;
+  background-color: rgba(255,255,255,0.3);
+}
+
+.tile:focus {
+  position: absolute;
+  background-color: rgba(255,255,255,0.5);
+}
+</style>
+</head>
+
+<body>
+<img src="map.png" id="mapphoto" alt="" />
+
+<script type="text/javascript">
+  const x0 = 160;
+  const y0 = 130;
+
+  for (let r = 0; r < 6; r++) {
+    for (let c = 0; c < 8; c++) {
+      let div = document.createElement('div');
+      w = 145 + r * 6.5;
+      div.className = 'tile';
+      div.tabIndex = '0';
+      div.style.left = String(x0 + c * w - r * 20) + 'px';
+      div.style.top = String(y0 + r * 110) + 'px';
+      div.style.width = String(w - 10) + 'px';
+      div.style.height = String(100) + 'px';
+      document.querySelector('body').appendChild(div);
+    }
+  }
+</script>
+
+</body>
+</html>
+
+
