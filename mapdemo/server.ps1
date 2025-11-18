@@ -94,7 +94,6 @@ try{
       'pad/57' { $row = 5*2; $col = 7; $geodata = "[${col},${row}]" }  
 
       'geodata'{ 
-        "get geodata"|oh
         $content = [System.Text.Encoding]::UTF8.GetBytes($geodata) 
       }
 
@@ -106,8 +105,6 @@ try{
         }
       }
     }
-    $path |oh
-    "set data [${col},${row}]"|oh
 
     $res.OutputStream.Write($content, 0, $content.Length)
     $res.Close()

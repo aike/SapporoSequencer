@@ -2,6 +2,8 @@
 const rows = 6;
 const cols = 8;
 const samples = [
+  "wav/kick.wav", 
+  "wav/kick.wav", 
   "wav/hihat.wav", 
   "wav/clap.wav", 
   "wav/snare.wav", 

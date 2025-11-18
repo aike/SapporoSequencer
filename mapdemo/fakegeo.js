@@ -53,8 +53,8 @@ function showGeoStatus(colrow) {
   $('southwest').innerText = address;
   $('xy').innerText = `${x},${y}`;
 
-  currentXpos = x;
-  currentYpos = y;
+  currentXpos = x;//colrow[0];
+  currentYpos = y;//colrow[1];
   $('address').innerText = address;
   $('instname').innerText = (y >= 0) ? instruments[y] : "";
   $('beatno').innerText = (colrow[1] >= 0) ? (colrow[0] + 1) : "";

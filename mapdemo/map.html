@@ -4,11 +4,15 @@
 <meta charset="utf-8">
 <title>Map Demo</title>
 <style>
+body {
+  background-color: black;
+}
+
 #mapphoto {
   position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 1600px;
+  top: 60px;
+  left: 30px;
+  width: 2738px;
 }
 
 .tile {
@@ -32,8 +36,8 @@
 <img src="map.png" id="mapphoto" alt="" />
 
 <script type="text/javascript">
-  const x0 = 160;
-  const y0 = 130;
+  const x0 = 300;
+  const y0 = 80;
 
   const xhr = new XMLHttpRequest();
   const url = 'http://localhost:3000';
@@ -55,13 +59,15 @@
   for (let r = 0; r < 6; r++) {
     for (let c = 0; c < 8; c++) {
       let div = document.createElement('div');
-      w = 145 + r * 6.5;
+      let w = 250 + r * 4;
+      let h = 220;
+      let m = 30;
       div.className = 'tile';
       div.tabIndex = '0';
-      div.style.left = String(x0 + c * w - r * 20) + 'px';
-      div.style.top = String(y0 + r * 110) + 'px';
-      div.style.width = String(w - 10) + 'px';
-      div.style.height = String(100) + 'px';
+      div.style.left = String(x0 + c * (w + m) - r * 10) + 'px';
+      div.style.top = String(y0 + r * (h + m)) + 'px';
+      div.style.width = String(w) + 'px';
+      div.style.height = String(h) + 'px';
       div.onclick = () => {
         console.log(`/pad/${r}${c} clicked`);
         send(`/pad/${r}${c}`);

@@ -2,6 +2,8 @@
 const rows = 6;
 const cols = 8;
 const samples = [
+  "wav/kick.wav", 
+  "wav/kick.wav", 
   "wav/hihat.wav", 
   "wav/clap.wav", 
   "wav/snare.wav", 
@@ -106,7 +108,7 @@ async function startstop() {
     seq.start(0);
     Tone.Transport.start();
   } else {
-//        seq.stop();
+    seq.stop();
     Tone.Transport.stop();
     showSteps();
   }
@@ -194,6 +196,7 @@ function setPadstatus() {
   $('beatno').innerText = (y >= 0) ? (x + 1) : "";
 
   // Property パネル更新
+  console.log(`setPadstatus: x=${x}, y=${y}`);
   if (steps[y][x]) {
     document.getElementById('padstatus').innerText = "ON";
     document.getElementById('padstatus').style.backgroundColor = "#" + padcolor[1][y].toString(16).padStart(6, '0');
@@ -261,7 +264,7 @@ function loadState() {
   if (debug) {
     data = localStorage.getItem("debugsong");
   } else {
-    data = localStorage.getItem("song");
+//    data = localStorage.getItem("song");
   }
   if (data) {
     try {
