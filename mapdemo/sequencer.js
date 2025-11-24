@@ -108,7 +108,7 @@ async function startstop() {
     seq.start(0);
     Tone.Transport.start();
   } else {
-    seq.stop();
+    //seq.stop();
     Tone.Transport.stop();
     showSteps();
   }
