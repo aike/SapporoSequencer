@@ -6,7 +6,7 @@ SapporoSequencer
 札幌の街全体をシーケンサーのユーザインタフェースにするスマホ用Webアプリです．  
 グルーブボックスのようにリズムパターンを入力できますが，それには実際に札幌の街を歩き回ってカーソルを動かす必要があります．
 
-<img src="ss.png" width="245px" />
+<img src="ss.png" width="400px" />
 
 ## Credit
 
