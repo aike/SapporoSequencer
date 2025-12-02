@@ -1,12 +1,14 @@
 SapporoSequencer
+---
 
+# Description
 
-# TODO
-- 位置情報取得
-- DB保存、読み込み
-- サンプル音ブラッシュアップ
-- Startボタンデザイン
-- 音量調整
-- W1～W8、N1～S5の表示
-- 地図ブラッシュアップ
+札幌の街全体をシーケンサーのユーザインタフェースにするスマホ用Webアプリです．  
+グルーブボックスのようにリズムパターンを入力できますが，それには実際に札幌の街を歩き回ってカーソルを動かす必要があります．
 
+<img src="ss.png" width="245px" />
+
+## Credit
+
+SapporoSequencer program is licensed under MIT License.  
+Contact: X @aike1000
